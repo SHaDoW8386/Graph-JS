@@ -41,21 +41,21 @@ function showQuery(val, q) {
   }
   res.innerHTML = '';
   let list = '';
-  console.log(val)
+  // console.log(val)
   var terms = autocompleteMatch(val, q)
-  console.log(terms)
+  // console.log(terms)
   for (i=0; i<terms.length; i++) {
-    console.log(list)
+    // console.log(list)
     list += '<button class="button-option" id="'+q+''+i+'" onclick="send(this.id, '+q+')">' + terms[i] + '</button>';
   }
   res.innerHTML = list;
-  console.log(q)
+  // console.log(q)
 }
 
 function send(atr, q){
   var attr = document.getElementById(atr)
   q.value = attr.innerText;
-  console.log( atr, q)  
+  // console.log( atr, q)  
 }
 
 // document.querySelector('#form1').addEventListener("submit", function(event){
@@ -95,6 +95,34 @@ function myFunction(n) {
     }
   }
 }
+
+
+//********************** For Graph *****************************************
+
+let cha = [];
+
+function myCharData(){
+var cdata =  fetch('./data.json')
+return cdata
+
+}
+
+var character = []
+var data = myCharData()
+data.then(response => response.json())
+.then((data) => {
+  cha.push(data['Madhya Pradesh'])
+  // cha = data;
+} )
+
+
+// console.log(d)
+console.log(cha)
+
+
+
+
+
 
 var Min = {
   x: [20, 21, 22, 23, 24, 25],
