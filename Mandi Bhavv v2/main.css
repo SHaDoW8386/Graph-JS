@@ -4,9 +4,26 @@
   list-style: none;
 }
 
+.annot{
+  position: absolute;
+  right: 5%;
+  bottom:0%;
+  z-index: 3;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  /* height: 80px; */
+  padding:10px;
+  /* background-color: aqua; */
+}
+.annot>h2{
+  margin-top:-5%;
+}
 body{
   display:flex;
   justify-content: space-around;
+  font-family: 'Courier New', monospace;
   align-items: center;
 }
 .left-side{
@@ -33,6 +50,7 @@ form{
   width: 100%;
   background:none;
 }
+
 form > input{
 
   padding:5px;
@@ -40,7 +58,7 @@ form > input{
   background: none;
   border:none;
   box-shadow:0 0 5px 2px black;
-  width:85%;
+  width:80%;
 }
 
 form > input{
@@ -69,23 +87,43 @@ section{
   align-items:center;
 }
 
-.right-side{
-  width:70%;
-  /* border: 2px solid black; */
-  height:700px;
-  box-shadow:0 0 10px 5px black;
-  background: transparent;
+.fourth-container{
+  position: relative;
+  width:220px;
+  display:flex;
+  top:-8%;
+}
+.fourth-container>form{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  width:100%;
 }
 
 
-.city, .state, .crop {
+
+.right-side{
+  width:70%;
+  /* border: 2px solid black; */
+  height:650px;
+  box-shadow:0 0 10px 5px black;
+  z-index : 2;
+  display:flex;
+  flex-direction:column;
+  border-radius:20px;
+  background: transparent;
+  margin-top: 4%;
+}
+
+
+.city, .state, .crop, .graph {
     border: 1px dotted #ccc;
     padding: 5px;
     position: absolute;
     margin-left: 8px;
-    width:230px;
+    width:200px;
     z-index:2;
-    background:rgba(0, 0, 0, 0.719);
+    /* background:rgba(0, 0, 0, 0.719); */
     border-radius: 25px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -93,10 +131,21 @@ section{
     flex-direction:column;
     text-align:center;
     overflow-y: auto;
+    box-shadow: 0 3px 5px 2px black;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     scrollbar-color: transparent;
     height:auto;
     max-height:100px;
+  }
+
+  .graph{
+    height: 100px;
+    top: 100%;
+    margin-left: 0;
+    width: 150px;
+    left: 8%;
+    background-color: white;
   }
 
   .button-option{
@@ -104,6 +153,9 @@ section{
     background:none;
     border:none;
     padding:8px;
+    border-radius: 25px;
+    font-size:90%;
+
   }
 
   .button-option:hover{

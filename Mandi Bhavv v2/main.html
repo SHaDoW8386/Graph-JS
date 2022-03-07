@@ -46,7 +46,7 @@
         <div class="second-container">
             <form autocomplete="off" id="form1">
                 <h2>STATE :- </h2>
-                <input type="text" name="state" id="state" onKeyUp="showQuery(this.value, 'state')" onfocus="myFunction(1)">
+                <input type="text" name="state" id="state" placeholder="STATE" onKeyUp="showQuery(this.value, 'state')" onfocus="myFunction(1)">
                 <button type="button" onclick="myFunction(1)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-state" style="display:none;" class="state hide"></div>
             </form>
@@ -54,7 +54,7 @@
         <div class="first-container">
             <form autocomplete="off" id="form2">
                 <h2>CITY :- </h2>
-                <input type="text" name="city" id="city" onKeyUp="showQuery(this.value, 'city')" onfocus="myFunction(2)">
+                <input type="text" name="city" id="city" placeholder="CITY" onKeyUp="showQuery(this.value, 'city')" onfocus="myFunction(2)">
                 <button type="button" onclick="myFunction(2)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-city" style="display:none;" class="city hide"></div>
             </form>
@@ -62,16 +62,28 @@
         <div class="third-container">
             <form autocomplete="off" id="form3">
                 <h2>CROP :- </h2>
-                <input type="text" name="crop" id="crop" onKeyUp="showQuery(this.value, 'crop')" onfocus="myFunction(3)">
+                <input type="text" name="crop" id="crop" placeholder="CROP" onKeyUp="showQuery(this.value, 'crop')" onfocus="myFunction(3)">
                 <button type="button" onclick="myFunction(3)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-crop"  style="display:none;" class="crop hide"></div>
             </form>
         </div>
     </div>
     <div class="right-side">
+        <div class="fourth-container">
+            <form autocomplete="off" id="form4">
+                <input type="text" name="graph" id="graph" placeholder="GRAPH" onKeyUp="showQuery(this.value, 'graph')" onfocus="myFunction(4)">
+                <button type="button" onclick="myFunction(4)"><i class="drop fas fa-chevron-up"></i></button>
+                <div id="show-graph"  style="display:none;" class="graph hide"></div>
+            </form>
+        </div>
+        <div class="annot">
+            <h3 id="graph-city">CITY</h3>
+            <h2 id="graph-crop">CROP</h2>
+        </div>
         <div id="myDiv"></div>
     </div>
     <!-- <script src="data.json"></script> -->
+    <script src="graph.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 var search_city = ["Mandla", "Mandsaur", "Indore", "Dewas", "Ujjain", "Jabalpur", "Shimla", "Manipur", "Khandwa", "Khargone", "Mumbai", "Delhi","Udaipur"];
 var search_state = ["Madhya Pradesh", "Bihar", "Punjab", "Rajasthan", "Maharastra", "Uttar Pradesh", "Gujarat"]
 var search_crop = ["Soybean", "Rice", "Bean", "Peas", "Gram", 'Wheat']
+var search_graph = ["LINE", "PIE", "BAR", "BUBBLE"]
 var state = document.getElementById("state")
 var city = document.getElementById("city")
 var crop = document.getElementById("crop")
+var graph = document.getElementById("graph")
 
 function myCharData(){
   var cdata =  fetch('./data.json')
@@ -18,6 +20,9 @@ function autocompleteMatch(input, q) {
     var sear = search_state
   }else if(q=="crop"){
     var sear = search_crop
+  }
+  else if(q=="graph"){
+    var sear = search_graph
   }
   if (input == '') {
     return sear;
@@ -35,6 +40,7 @@ window.onload = function(){
 showQuery("","city");
 showQuery("","state");
 showQuery("","crop");
+showQuery("","graph")
 }
 
 
@@ -45,6 +51,8 @@ function showQuery(val, q) {
     var res = document.getElementById('show-state')
   }else if(q=="crop"){
     var res = document.getElementById('show-crop')
+  }else if(q=="graph"){
+    var res = document.getElementById('show-graph')
   }
   res.innerHTML = '';
   let list = '';
@@ -68,6 +76,7 @@ document.querySelector('#form1').addEventListener("submit", function(event){
     var select_state = window.state.value
     var select_city = window.city.value
     var select_crop = window.crop.value
+    var select_graph = window.graph.value
     window.search_city = []
     window.search_crop = []
     var data = myCharData()
@@ -80,11 +89,14 @@ document.querySelector('#form1').addEventListener("submit", function(event){
       window.crop.value=select_crop
       window.search_city = Object.keys(data[select_state])
       window.search_crop = Object.keys(data[select_state][select_city])
+      
       showQuery("","city");
       showQuery("","state");
       showQuery("","crop");
-      graph(select_state, select_city, select_crop);
+      graphs(select_state, select_city, select_crop, select_graph);
       myFunction(1)
+      document.getElementById("graph-city").innerHTML = select_city
+      document.getElementById("graph-crop").innerHTML = select_crop
     })
 });
 
@@ -96,24 +108,38 @@ document.querySelector('#form2').addEventListener("submit", function(event){
     var select_state = window.state.value
     var select_city = window.city.value
     var select_crop = window.crop.value
+    var select_graph = window.graph.value
+    console.log(select_state, select_city, select_crop, "1")
     window.search_crop = []
     var data = myCharData()
     data.then(response => response.json())
     .then((data) => {
         for(i in data){
+          // console.log(i)
           for(j in data[i]){
-            if(j==city){
+            // console.log(j)
+            if(j==select_city){
               select_state = i;
               break;
             }
           }
         }
+        // console.log(select_state)
       window.search_crop = Object.keys(data[select_state][select_city])
+      window.state.value = select_state
+      if(select_crop==""){
+        select_crop = Object.keys(data[select_state][select_city])[0]
+      }
+      window.crop.value = select_crop
+      
       showQuery("","city");
       showQuery("","state");
       showQuery("","crop");
-      graph(select_state, select_city, select_crop);
+      console.log(select_state, select_city, select_crop, "2")
+      graphs(select_state, select_city, select_crop, select_graph);
       myFunction(2)
+      document.getElementById("graph-city").innerHTML = select_city
+      document.getElementById("graph-crop").innerHTML = select_crop
     })
     
 });
@@ -122,10 +148,44 @@ document.querySelector('#form2').addEventListener("submit", function(event){
 //---------------------------------THIRD FORM SUBMIT----------------------------------------------------
 document.querySelector('#form3').addEventListener("submit", function(event){
   event.preventDefault();
-  myFunction(3)
+  var select_state = window.state.value
+  var select_city = window.city.value
+  var select_crop = window.crop.value
+  var select_graph = window.graph.value
+  var data = myCharData()
+    data.then(response => response.json())
+    .then((data) => {
+    if(select_state==""){
+      select_state = Object.keys(data)[0]
+      window.state.value = select_state
+    }
+    if(select_city==""){
+      select_city = Object.keys(data[select_state])[0]
+      window.city.value = select_city
+    }
+    
+    showQuery("","city");
+    showQuery("","state");
+    showQuery("","crop");
+
+    console.log(select_state, select_city, select_crop)
+    graphs(select_state, select_city, select_crop, select_graph);
+    myFunction(3)
+    document.getElementById("graph-city").innerHTML = select_city
+    document.getElementById("graph-crop").innerHTML = select_crop
+  })
 });
+
+//------------------------------GRAPH SELECT--------------------------------------------------------
 document.querySelector('#form4').addEventListener("submit", function(event){
   event.preventDefault();
+  var select_state = window.state.value
+  var select_city = window.city.value
+  var select_crop = window.crop.value
+  var select_graph = window.graph.value
+  console.log(select_state, select_city, select_crop, select_graph)
+  graphs(select_state, select_city, select_crop, select_graph);
+  myFunction(4)
 });
 
 
@@ -157,7 +217,7 @@ function myFunction(n) {
 
 
 
-function graph(state, city, crop){
+function graphs(state, city, crop, graph){
   var data = myCharData()
   data.then(response => response.json())
   .then((data) => {
@@ -168,56 +228,21 @@ function graph(state, city, crop){
     var select_graph = data[state][city][crop]
 
     for(i in select_graph){
-      console.log(Object.keys(select_graph[i]))
+      // console.log(Object.keys(select_graph[i]))
       max.push(select_graph[i].max)
       min.push(select_graph[i].min)
       avg.push(select_graph[i].avg)
       x_axis.push(select_graph[i].date)
     }
 
-    console.log(max)
-    console.log(x_axis)
-
-  var Min = {
-    x: x_axis,
-    y: min,
-    type: 'scatter',
-    line: {shape: 'spline',width:5, color:'blue'},
-    marker: {
-      color: 'black',
-      size: 15
-    },
-  };
-
-  var Max = {
-    x: x_axis,
-    y: max,
-    type: 'scatter',
-    line: {shape: 'spline',width:5, color:'red'},
-    marker: {
-      color: 'black',
-      size: 15
-    },
-  };
-
-  var Avg = {
-    x: x_axis,
-    y: avg,
-    type: 'scatter',
-    line: {shape: 'spline',width:5, color:'green'},
-    marker: {
-      color: 'black',
-      size: 15
-    },
-    
-  };
-
-  var layout = {
-    height: 650
-  };
-
-  var datum = [Min, Max, Avg];
-
-  Plotly.newPlot('myDiv', datum, layout);
+    if(graph=="PIE"){
+      pie(min, max, avg, x_axis)
+    }else if(graph=="LINE"){
+      line(min, max, avg, x_axis)
+    }else if(graph=="BAR"){
+      bar(min, max, avg, x_axis)
+    }else if(graph=="BUBBLE"){
+      bubble(min, max, avg, x_axis)
+    }
 })
 }
