@@ -1,11 +1,33 @@
+
 var search_city = ["Mandla", "Mandsaur", "Indore", "Dewas", "Ujjain", "Jabalpur", "Shimla", "Manipur", "Khandwa", "Khargone", "Mumbai", "Delhi","Udaipur"];
-var search_state = ["Madhya Pradesh", "Bihar", "Punjab", "Rajasthan", "Maharastra", "Uttar Pradesh", "Gujarat"]
+var search_state = ["Madhya Pradesh", "Punjab", "Gujarat","Maharashtra"]
 var search_crop = ["Soybean", "Rice", "Bean", "Peas", "Gram", 'Wheat']
 var search_graph = ["LINE", "PIE", "BAR", "BUBBLE"]
+var DATE = []
 var state = document.getElementById("state")
 var city = document.getElementById("city")
 var crop = document.getElementById("crop")
 var graph = document.getElementById("graph")
+listing();
+console.log(search_state)
+showQuery("","city");
+showQuery("","state");
+showQuery("","crop");
+showQuery("","graph");
+Dates(0,7, false);
+window.onload = function(){
+  }
+  
+function listing(){
+  var data = myCharData()
+    data.then(response => response.json())
+    .then((data) =>{
+      globalThis.search_state=[]
+      window.search_state = Object.keys(data)
+      console.log(search_state)
+      console.log(Object.keys(data))
+    })
+  }
 
 function myCharData(){
   var cdata =  fetch('./data.json')
@@ -36,12 +58,7 @@ function autocompleteMatch(input, q) {
 }
 
 
-window.onload = function(){
-showQuery("","city");
-showQuery("","state");
-showQuery("","crop");
-showQuery("","graph")
-}
+
 
 
 function showQuery(val, q) {
@@ -70,34 +87,51 @@ function send(atr, q){
 
 
 //---------------------------------------------FIRST FORM SUBMIT------------------------------------------------------------------
+var whi = ""
+
+function FirstContainer(whi){
+  var select_state = window.state.value
+  var select_city = window.city.value
+  var select_crop = window.crop.value
+  var select_graph = window.graph.value
+  window.search_city = []
+  window.search_crop = []
+  var data = myCharData()
+  data.then(response => response.json())
+  .then((data) => {
+    // if (select_state==""){
+    //   select_state = Object.keys(data)[0]
+    //   window.state.value = select_state
+    // }
+    console.log(Object.keys(data[select_state]))
+    if(select_city=="" | whi=="state"){
+      select_city = Object.keys(data[select_state])[0]
+      window.city.value=select_city
+    }
+    if(select_crop==""){
+      select_crop = Object.keys(data[select_state][select_city])[0]
+      window.crop.value=select_crop
+    }
+    console.log(select_state, select_city, select_crop)
+    window.search_city = Object.keys(data[select_state])
+    window.search_crop = Object.keys(data[select_state][select_city])
+    showQuery("","city");
+    showQuery("","state");
+    showQuery("","crop");
+    if(select_graph!=""){
+      graphs(select_state, select_city, select_crop, select_graph);
+    }
+    console.log(select_graph)
+    myFunction(1)
+    document.getElementById("graph-city").innerHTML = select_city
+    document.getElementById("graph-crop").innerHTML = select_crop
+  })
+}
+
 
 document.querySelector('#form1').addEventListener("submit", function(event){
     event.preventDefault();
-    var select_state = window.state.value
-    var select_city = window.city.value
-    var select_crop = window.crop.value
-    var select_graph = window.graph.value
-    window.search_city = []
-    window.search_crop = []
-    var data = myCharData()
-    data.then(response => response.json())
-    .then((data) => {
-      console.log(Object.keys(data[select_state]))
-      select_city = Object.keys(data[select_state])[0]
-      select_crop = Object.keys(data[select_state][select_city])[0]
-      window.city.value=select_city
-      window.crop.value=select_crop
-      window.search_city = Object.keys(data[select_state])
-      window.search_crop = Object.keys(data[select_state][select_city])
-      
-      showQuery("","city");
-      showQuery("","state");
-      showQuery("","crop");
-      graphs(select_state, select_city, select_crop, select_graph);
-      myFunction(1)
-      document.getElementById("graph-city").innerHTML = select_city
-      document.getElementById("graph-crop").innerHTML = select_crop
-    })
+    FirstContainer("state");
 });
 
 
@@ -110,13 +144,22 @@ document.querySelector('#form2').addEventListener("submit", function(event){
     var select_crop = window.crop.value
     var select_graph = window.graph.value
     console.log(select_state, select_city, select_crop, "1")
+    if(select_state==""){
+      console.log(select_state)
+      new $.Zebra_Dialog('SELECT STATE FIRST!', {
+        custom_class: "myclass",
+        title: "WARNING!!"
+      });
+      myFunction(2)
+      return undefined;
+    }
     window.search_crop = []
     var data = myCharData()
     data.then(response => response.json())
     .then((data) => {
-        for(i in data){
+        for(var i in data){
           // console.log(i)
-          for(j in data[i]){
+          for(var j in data[i]){
             // console.log(j)
             if(j==select_city){
               select_state = i;
@@ -136,7 +179,9 @@ document.querySelector('#form2').addEventListener("submit", function(event){
       showQuery("","state");
       showQuery("","crop");
       console.log(select_state, select_city, select_crop, "2")
-      graphs(select_state, select_city, select_crop, select_graph);
+      if(select_graph!=""){
+        graphs(select_state, select_city, select_crop, select_graph);
+      }
       myFunction(2)
       document.getElementById("graph-city").innerHTML = select_city
       document.getElementById("graph-crop").innerHTML = select_crop
@@ -169,7 +214,9 @@ document.querySelector('#form3').addEventListener("submit", function(event){
     showQuery("","crop");
 
     console.log(select_state, select_city, select_crop)
-    graphs(select_state, select_city, select_crop, select_graph);
+    if(select_graph!=""){
+      graphs(select_state, select_city, select_crop, select_graph);
+    }
     myFunction(3)
     document.getElementById("graph-city").innerHTML = select_city
     document.getElementById("graph-crop").innerHTML = select_crop
@@ -212,8 +259,60 @@ function myFunction(n) {
   }
 }
 
+var getDateArray = function(start, end) {
+  window.DATE = []
+  var dt = new Date(start);
+  while (dt <= end) {
+     var dat = new Date(dt)
+      window.DATE.push(moment(dat).format('YYYY-MM-DD'));
+      dt.setDate(dt.getDate() + 1);
+  }
+  // return arr;
+}
 
-//********************** For Graph *****************************************
+var flag=false;
+
+function Dates(start, end, flag){
+      window.DATE = []
+      for (i = start; i < end; i++){
+        var today = moment();
+         var day = today.subtract(i, 'days');
+         window.DATE.push(day.format('YYYY-MM-DD'));
+        //  console.log(day.format('D'))
+      }
+      console.log(DATE)
+    if(flag){
+    FirstContainer("date");
+    myFunction(1);
+  }
+}
+
+$(function(){
+$('input[name="daterange"]').daterangepicker({
+    opens: 'left',
+    placeholder:"DATE:-",
+    autoUpdateInput: true,
+    autoApply:true,
+    locale: {
+      format: 'YYYY-MM-DD',
+      separator: " - ",
+      // cancelLabel: 'Clear'
+  }
+}, function(start, end, label) {
+    // console.log(start)
+    var startDate = new Date(start.format('YYYY-MM-DD'))
+    var endDate = new Date(end.format('YYYY-MM-DD'))
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    getDateArray(startDate, endDate);
+    console.log(DATE)
+    FirstContainer("date");
+    myFunction(1)
+});
+});
+
+
+
+//***************************************** For Graph *****************************************
 
 
 
@@ -228,13 +327,21 @@ function graphs(state, city, crop, graph){
     var select_graph = data[state][city][crop]
 
     for(i in select_graph){
-      // console.log(Object.keys(select_graph[i]))
-      max.push(select_graph[i].max)
-      min.push(select_graph[i].min)
-      avg.push(select_graph[i].avg)
-      x_axis.push(select_graph[i].date)
+      if (DATE.includes(select_graph[i].date)){
+        max.push(select_graph[i].max)
+        min.push(select_graph[i].min)
+        avg.push(select_graph[i].avg)
+        x_axis.push(select_graph[i].date)
+      }
     }
-
+    if (x_axis.length==0){
+      new $.Zebra_Dialog('DATA NOT AVAILABLE OF THIS DATE!', {
+        custom_class: "myclass",
+        title: "WARNING!!"
+      });
+      return undefined;
+    }
+    console.log(x_axis)
     if(graph=="PIE"){
       pie(min, max, avg, x_axis)
     }else if(graph=="LINE"){

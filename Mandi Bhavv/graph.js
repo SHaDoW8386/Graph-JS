@@ -1,4 +1,13 @@
 //---------------------- PIE CHART ---------------------------
+var hover = "<extra><b style='color:red; border-bottom:2px solid white;'>%{xaxis.title.text}: %{x}</b><extra><br>" +
+"%{yaxis.title.text}: %{y:$,.0f}<br>" +
+"%{xaxis.title.text}: %{x}<br>" +
+"<extra></extra>"
+
+var hovers="<b style='color:red;'>%{y}</b>"
+            
+        
+
 
 function pie(min, max, avg, x_axis){
     var datapie = [{
@@ -6,7 +15,7 @@ function pie(min, max, avg, x_axis){
         labels: x_axis,
         domain: {column: 0},
         name: 'MIN',
-        hoverinfo: 'value+percent+name',
+        hoverinfo: 'value+label+name',
         textinfo: "value",
         textposition: "inside",
         hole: .4,
@@ -16,7 +25,7 @@ function pie(min, max, avg, x_axis){
         labels: x_axis,
         domain: {column: 1},
         name: 'MAX',
-        hoverinfo: 'value+percent+name',
+        hoverinfo: 'value+label+name',
         textinfo: "value",
         textposition: "inside",
         hole: .4,
@@ -28,7 +37,7 @@ function pie(min, max, avg, x_axis){
         textinfo: "value",
         textposition: "inside",
         name: 'AVG',
-        hoverinfo: 'value+percent+name',
+        hoverinfo: 'value+label+name',
         hole: .4,
         type: 'pie'
       }];
@@ -64,10 +73,12 @@ function pie(min, max, avg, x_axis){
             y: 0.5
           }
         ],
+        
         height: 600,
         // width: 600,
         showlegend: true,
-        grid: {rows: 1, columns: 3}
+        grid: {rows: 1, columns: 3},
+        hovermode:"x unified",
       };
       
       Plotly.newPlot('myDiv', datapie, layout);
@@ -84,13 +95,15 @@ function bar(min, max, avg, x_axis){
         x: x_axis,
         y: min,
         name: 'MIN',
-        type: 'bar'
+        type: 'bar',
+        hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
       };
       
       var trace2 = {
         x: x_axis,
         y: max,
         name: 'MAX',
+        hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         type: 'bar'
       };
 
@@ -98,7 +111,8 @@ function bar(min, max, avg, x_axis){
         x: x_axis,
         y: avg,
         name: 'AVG',
-        type: 'bar'
+        type: 'bar',
+        hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
       };
       
       var databar = [trace1, trace2, trace3];
@@ -112,6 +126,7 @@ function bar(min, max, avg, x_axis){
                 size: 14,
                 color: 'black'
               },
+              tickangle: -45,
             
         },
         yaxis:{
@@ -122,6 +137,7 @@ function bar(min, max, avg, x_axis){
                 color: 'black'
               },
         },
+        hovermode:"x unified",
         barmode: 'group',
         height:600
         };
@@ -137,7 +153,7 @@ function line(min, max, avg, x_axis){
         y: min,
         type: 'scatter',
         name: "MIN",
-        hoverinfo:"name+y",
+        hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'blue'},
         marker: {
           color: 'black',
@@ -150,6 +166,7 @@ function line(min, max, avg, x_axis){
         y: max,
         type: 'scatter',
         name: "MAX",
+        hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'red'},
         marker: {
           color: 'black',
@@ -162,6 +179,7 @@ function line(min, max, avg, x_axis){
         y: avg,
         type: 'scatter',
         name: "AVG",
+        hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'green'},
         marker: {
           color: 'black',
@@ -182,6 +200,7 @@ function line(min, max, avg, x_axis){
                 size: 14,
                 color: 'black'
               },
+            tickangle: -45,
             
         },
         yaxis:{
@@ -192,6 +211,7 @@ function line(min, max, avg, x_axis){
                 color: 'black'
               },
         },
+        hovermode:"x unified"
         // width: 800,
         // grid: {rows: 2, columns: 2}
       };
@@ -207,38 +227,44 @@ function bubble(min, max, avg, x_axis){
     var trace1 = {
         x: x_axis,
         y: min,
-        text: ['A<br>size: 40', 'B<br>size: 60', 'C<br>size: 80', 'D<br>size: 100'],
+        // text: ['A<br>size: 40', 'B<br>size: 60', 'C<br>size: 80', 'D<br>size: 100'],
         mode: 'markers',
+        hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
         marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
+        size: 20,
         sizemode: 'area'
-        }
+        },
+        name:"MIN"
     };
     
     var trace2 = {
         x: x_axis,
         y: max,
-        text: ['A</br>size: 40</br>sixeref: 0.2', 'B</br>size: 60</br>sixeref: 0.2', 'C</br>size: 80</br>sixeref: 0.2', 'D</br>size: 100</br>sixeref: 0.2'],
+        // text: ['A</br>size: 40</br>sixeref: 0.2', 'B</br>size: 60</br>sixeref: 0.2', 'C</br>size: 80</br>sixeref: 0.2', 'D</br>size: 100</br>sixeref: 0.2'],
         mode: 'markers',
+        hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
+        size: 60,
         //setting 'sizeref' to lower than 1 decreases the rendered size
         // sizeref: 2,
         sizemode: 'area'
-        }
+        },
+        name:"MAX"
     };
     
     var trace3 = {
         x: x_axis,
         y: avg,
-        text: ['A</br>size: 40</br>sixeref: 2', 'B</br>size: 60</br>sixeref: 2', 'C</br>size: 80</br>sixeref: 2', 'D</br>size: 100</br>sixeref: 2'],
+        // text: ['A</br>size: 40</br>sixeref: 2', 'B</br>size: 60</br>sixeref: 2', 'C</br>size: 80</br>sixeref: 2', 'D</br>size: 100</br>sixeref: 2'],
         mode: 'markers',
+        hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
         marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
+        size: 40,
         //setting 'sizeref' to less than 1, increases the rendered marker sizes
-        // sizeref: 0.2,
+        sizeref: 0.2,
         sizemode: 'area'
-        }
+        },
+        name:"AVG"
     };
     
     var databubble = [trace1, trace2, trace3];
@@ -252,6 +278,8 @@ function bubble(min, max, avg, x_axis){
                 size: 14,
                 color: 'black'
               },
+              tickangle: -45,
+
             
         },
         yaxis:{
@@ -263,6 +291,7 @@ function bubble(min, max, avg, x_axis){
               },
         },
         showlegend: true,
+        hovermode:"x unified",
         height: 600,
         // width: 600
     };

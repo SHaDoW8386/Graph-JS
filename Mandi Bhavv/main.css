@@ -40,12 +40,37 @@ body{
 }
 .first-container,
 .second-container,
-.third-container{
+.third-container,
+.sixth-container{
   width:90%;
   /* background-color:aqua; */
   /* height:10%; */
   /* margin-top: 15%; */
 }
+.sixth-container{
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.date-but{
+  border-radius: 50%;
+  padding:5px;
+  width:60px;
+  height:60px;
+  transition: all 0.5s ease-in-out;
+  background: none;
+}
+.date-but:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 10px 4px purple;
+}
+
+.date-but:focus{
+  transform:scale(1.1);
+  box-shadow:0 0 10px 4px red;
+}
+
 form{
   width: 100%;
   background:none;
@@ -87,11 +112,16 @@ section{
   align-items:center;
 }
 
-.fourth-container{
+.fourth-container,
+.fifth-container{
   position: relative;
   width:220px;
   display:flex;
   top:-8%;
+}
+.fifth-container{
+  left:25%;
+  top:-12%;
 }
 .fourth-container>form{
   display:flex;
@@ -135,6 +165,7 @@ section{
     overflow-x: hidden;
     scroll-behavior: smooth;
     scrollbar-color: transparent;
+    background:white;
     height:auto;
     max-height:100px;
   }
@@ -227,7 +258,34 @@ section{
     transform:scale(0.8) rotateX(180deg);
     /* filter:blur(1px); */
   }
+  .myclass .ZebraDialog_Title {
+    background: green;
+  }
+  .myclass .ZebraDialog_Body {
+    color: white;
+      font-size: 21px;
+      background-color: rgba(0, 0, 0, 0.637);
+  }
 
+  .ZebraDialog_Information .ZebraDialog_Body{
+    background-image: url("https://www.kisaanhelpline.com/uploads/kh_services/Plant-Nutrition.png");
+    background-size:20%;
+  }
+
+  .ZebraDialog, .ZebraDialog_Body, .ZebraDialog_Buttons a, .ZebraDialog_Title {
+    font-family: 'Courier New', monospace;
+  }
+
+
+.ZebraDialog{
+    background-image: url("crop.jpg");
+    background-size: 100%;
+  }
+
+  .myclass .ZebraDialog_Title{
+    background-image: url("crop.jpg");
+    background-size: 100%;
+  }
 
   @keyframes animate{
     0%{
