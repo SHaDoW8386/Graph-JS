@@ -1,7 +1,6 @@
 {
 "Madhya Pradesh":{
     "Indore":{
-                
         "Soybean":[
                 {"min":1650, "max":1850,"avg":1750,"date":"2022-02-26"},
                 {"min":1750, "max":2950,"avg":1950,"date":"2022-02-25"},

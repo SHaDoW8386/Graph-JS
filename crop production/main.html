@@ -5,6 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <script defer src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zebra_dialog@latest/dist/zebra_dialog.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zebra_dialog@latest/dist/css/flat/zebra_dialog.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
     <script src='https://cdn.plot.ly/plotly-2.9.0.min.js'></script>
     <link rel="stylesheet" href="main.css">
     <title>Document</title>
@@ -61,18 +69,26 @@
         </div>
         <div class="third-container">
             <form autocomplete="off" id="form3">
-                <h2>CROP :- </h2>
-                <input type="text" name="crop" id="crop" placeholder="CROP" onKeyUp="showQuery(this.value, 'crop')" onfocus="myFunction(3)">
+                <h2>village1 :- </h2>
+                <input type="text" name="village1" id="village1" placeholder="VILLAGE" onKeyUp="showQuery(this.value, 'village1')" onfocus="myFunction(3)">
                 <button type="button" onclick="myFunction(3)"><i class="drop fas fa-chevron-up"></i></button>
-                <div id="show-crop"  style="display:none;" class="crop hide"></div>
+                <div id="show-village1"  style="display:none;" class="village1 hide"></div>
+            </form>
+        </div>
+        <div class="fifth-container">
+            <form autocomplete="off" id="form5">
+                <h2>village2 :- </h2>
+                <input type="text" name="village2" id="village2" placeholder="VILLAGE" onKeyUp="showQuery(this.value, 'village2')" onfocus="myFunction(4)">
+                <button type="button" onclick="myFunction(4)"><i class="drop fas fa-chevron-up"></i></button>
+                <div id="show-village2"  style="display:none;" class="village2 hide"></div>
             </form>
         </div>
     </div>
     <div class="right-side">
         <div class="fourth-container">
             <form autocomplete="off" id="form4">
-                <input type="text" name="graph" id="graph" placeholder="GRAPH" onKeyUp="showQuery(this.value, 'graph')" onfocus="myFunction(4)">
-                <button type="button" onclick="myFunction(4)"><i class="drop fas fa-chevron-up"></i></button>
+                <input type="text" value="LINE" name="graph" id="graph" placeholder="GRAPH" onKeyUp="showQuery(this.value, 'graph')" onfocus="myFunction(5)">
+                <button type="button" onclick="myFunction(5)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-graph"  style="display:none;" class="graph hide"></div>
             </form>
         </div>

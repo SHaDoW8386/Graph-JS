@@ -5,7 +5,7 @@ var hover = "<extra><b style='color:red; border-bottom:2px solid white;'>%{xaxis
 "<extra></extra>"
 
 var hovers="<b style='color:red;'>%{y}</b>"
-            
+var colors = ['blue', 'rgba(255, 144, 14, 1)', 'green', 'red']
         
 
 
@@ -43,7 +43,11 @@ function pie(min, max, avg, x_axis){
       }];
       
       var layout = {
-        title: 'MANDI BHAVV',
+        // title: 'MANDI BHAVV',
+        
+        // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2],
         annotations: [
           {
             font: {
@@ -74,9 +78,10 @@ function pie(min, max, avg, x_axis){
           }
         ],
         
-        height: 600,
+        height: 700,
         // width: 600,
         showlegend: true,
+        template:"plotly_dark",
         grid: {rows: 1, columns: 3},
         hovermode:"x unified",
       };
@@ -96,6 +101,9 @@ function bar(min, max, avg, x_axis){
         y: min,
         name: 'MIN',
         type: 'bar',
+        marker:{
+          color:colors[0]
+        },
         hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
       };
       
@@ -103,6 +111,9 @@ function bar(min, max, avg, x_axis){
         x: x_axis,
         y: max,
         name: 'MAX',
+        marker:{
+          color:colors[3]
+        },
         hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         type: 'bar'
       };
@@ -111,6 +122,9 @@ function bar(min, max, avg, x_axis){
         x: x_axis,
         y: avg,
         name: 'AVG',
+        marker:{
+          color:colors[2]
+        },
         type: 'bar',
         hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
       };
@@ -118,28 +132,35 @@ function bar(min, max, avg, x_axis){
       var databar = [trace1, trace2, trace3];
       
       var layout = {
-        title:"MANDI BHAVV",
+        // title:"MANDI BHAVV",
         xaxis:{
             title:"DATE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
               tickangle: -45,
+              color:themes[0],
+              gridcolor:themes[3],
             
         },
         yaxis:{
             title:"PRICE",
+            color:themes[0],
+            gridcolor:themes[3],
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
         },
         hovermode:"x unified",
         barmode: 'group',
-        height:600
+        // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2],
+        height:700
         };
       
       Plotly.newPlot('myDiv', databar, layout);
@@ -147,7 +168,7 @@ function bar(min, max, avg, x_axis){
 
 //---------------------------------LINE CHART-------------------------------------------------
 
-function line(min, max, avg, x_axis){
+function line(min, max, avg, x_axis, themes){
     var Min = {
         x: x_axis,
         y: min,
@@ -156,8 +177,9 @@ function line(min, max, avg, x_axis){
         hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'blue'},
         marker: {
-          color: 'black',
-          size: 10
+          // color: 'black',
+          size: 20,
+          autocolorscale: true
         },
       };
     
@@ -169,8 +191,8 @@ function line(min, max, avg, x_axis){
         hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'red'},
         marker: {
-          color: 'black',
-          size: 10
+          // color: 'black',
+          size: 20
         },
       };
     
@@ -182,8 +204,8 @@ function line(min, max, avg, x_axis){
         hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
         line: {shape: 'spline',width:5, color:'green'},
         marker: {
-          color: 'black',
-          size: 10
+          // color: 'black',
+          size: 20
         },
         
       };
@@ -191,16 +213,18 @@ function line(min, max, avg, x_axis){
       var datum = [Min, Max, Avg];
 
       var layout = {
-        height: 600,
-        title:"MANDI BHAVV",
+        height: 700,
+        // title:"MANDI BHAVV",
         xaxis:{
             title:"DATE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
             tickangle: -45,
+            color:themes[0],
+            gridcolor:themes[3],
             
         },
         yaxis:{
@@ -208,11 +232,15 @@ function line(min, max, avg, x_axis){
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
+              gridcolor:themes[3],
+              color:themes[0],
         },
-        hovermode:"x unified"
+        hovermode:"x unified",
         // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2]
         // grid: {rows: 2, columns: 2}
       };
 
@@ -232,7 +260,8 @@ function bubble(min, max, avg, x_axis){
         hovertemplate:"<b style='color:blue;'>%{y:$,.0f}</b>",
         marker: {
         size: 20,
-        sizemode: 'area'
+        sizemode: 'area',
+        color:colors[0],
         },
         name:"MIN"
     };
@@ -245,6 +274,7 @@ function bubble(min, max, avg, x_axis){
         hovertemplate:"<b style='color:red;'>%{y:$,.0f}</b>",
         marker: {
         size: 60,
+        color:colors[3],
         //setting 'sizeref' to lower than 1 decreases the rendered size
         // sizeref: 2,
         sizemode: 'area'
@@ -260,6 +290,7 @@ function bubble(min, max, avg, x_axis){
         hovertemplate:"<b style='color:green;'>%{y:$,.0f}</b>",
         marker: {
         size: 40,
+        color:colors[2],
         //setting 'sizeref' to less than 1, increases the rendered marker sizes
         sizeref: 0.2,
         sizemode: 'area'
@@ -270,15 +301,17 @@ function bubble(min, max, avg, x_axis){
     var databubble = [trace1, trace2, trace3];
     
     var layout = {
-        title: 'MANDI BHAVV',
+        // title: 'MANDI BHAVV',
         xaxis:{
             title:"DATE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
               tickangle: -45,
+              color:themes[0],
+              gridcolor:themes[3],
 
             
         },
@@ -287,12 +320,17 @@ function bubble(min, max, avg, x_axis){
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
+            color:themes[0],
+            gridcolor:themes[3],
         },
         showlegend: true,
         hovermode:"x unified",
-        height: 600,
+        height: 700,
+        // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2]
         // width: 600
     };
     

@@ -1,11 +1,18 @@
-var search_city = ["Mandla", "Mandsaur", "Indore", "Dewas", "Ujjain", "Jabalpur", "Shimla", "Manipur", "Khandwa", "Khargone", "Mumbai", "Delhi","Udaipur"];
-var search_state = ["Madhya Pradesh", "Bihar", "Punjab", "Rajasthan", "Maharastra", "Uttar Pradesh", "Gujarat"]
-var search_crop = ["Soybean", "Rice", "Bean", "Peas", "Gram", 'Wheat']
+var search_city = ["Jabalpur", "Indore", "Bhopal", "Varanasi", "Lucknow"]
+var search_state = ["Madhya Pradesh", "Uttar Pradesh"]
+var search_v1 = []
+var search_v2 = []
 var search_graph = ["LINE", "PIE", "BAR", "BUBBLE"]
 var state = document.getElementById("state")
 var city = document.getElementById("city")
-var crop = document.getElementById("crop")
+var v1 = document.getElementById("village1")
+var v2 = document.getElementById("village2")
 var graph = document.getElementById("graph")
+var select_state = window.state.value
+var select_city = window.city.value
+var select_v1 = window.v1.value
+var select_v2 = window.v2.value
+var select_graph = window.graph.value
 
 function myCharData(){
   var cdata =  fetch('./data.json')
@@ -18,10 +25,11 @@ function autocompleteMatch(input, q) {
     var sear = search_city
   }else if(q=="state"){
     var sear = search_state
-  }else if(q=="crop"){
-    var sear = search_crop
-  }
-  else if(q=="graph"){
+  }else if(q=="village1"){
+    var sear = search_v1
+  }else if(q=="village2"){
+    var sear = search_v2
+  }else if(q=="graph"){
     var sear = search_graph
   }
   if (input == '') {
@@ -39,8 +47,11 @@ function autocompleteMatch(input, q) {
 window.onload = function(){
 showQuery("","city");
 showQuery("","state");
-showQuery("","crop");
-showQuery("","graph")
+showQuery("","village1");
+showQuery("","village2");
+showQuery("","graph");
+graphs(select_state, select_city, select_v1, select_v2, select_graph);
+
 }
 
 
@@ -49,8 +60,10 @@ function showQuery(val, q) {
     var res = document.getElementById("show-city");
   }else if(q=="state"){
     var res = document.getElementById('show-state')
-  }else if(q=="crop"){
-    var res = document.getElementById('show-crop')
+  }else if(q=="village1"){
+    var res = document.getElementById('show-village1')
+  }else if(q=="village2"){
+    var res = document.getElementById('show-village2')
   }else if(q=="graph"){
     var res = document.getElementById('show-graph')
   }
@@ -75,28 +88,27 @@ document.querySelector('#form1').addEventListener("submit", function(event){
     event.preventDefault();
     var select_state = window.state.value
     var select_city = window.city.value
-    var select_crop = window.crop.value
+    var select_v1 = window.v1.value
+    var select_v2 = window.v2.value
     var select_graph = window.graph.value
     window.search_city = []
-    window.search_crop = []
+    window.search_v1 = []
+    window.search_v2 = []
     var data = myCharData()
     data.then(response => response.json())
     .then((data) => {
-      console.log(Object.keys(data[select_state]))
-      select_city = Object.keys(data[select_state])[0]
-      select_crop = Object.keys(data[select_state][select_city])[0]
-      window.city.value=select_city
-      window.crop.value=select_crop
-      window.search_city = Object.keys(data[select_state])
-      window.search_crop = Object.keys(data[select_state][select_city])
-      
+      var datum_city = Object.keys(data[select_state])
+      for(var i in datum_city){
+        if(datum_city[i]!="data"){
+          window.search_city.push(datum_city[i])
+          console.log(datum_city[i])
+        }
+      }
       showQuery("","city");
-      showQuery("","state");
-      showQuery("","crop");
-      graphs(select_state, select_city, select_crop, select_graph);
+      graphs(select_state, select_city, select_v1, select_v2, select_graph);
       myFunction(1)
       document.getElementById("graph-city").innerHTML = select_city
-      document.getElementById("graph-crop").innerHTML = select_crop
+      document.getElementById("graph-crop").innerHTML = select_v1
     })
 });
 
@@ -105,87 +117,130 @@ document.querySelector('#form1').addEventListener("submit", function(event){
 
 document.querySelector('#form2').addEventListener("submit", function(event){
     event.preventDefault();
+    window.v1.value = ""
+    window.v2.value = ""
     var select_state = window.state.value
     var select_city = window.city.value
-    var select_crop = window.crop.value
+    var select_v1 = window.v1.value
+    var select_v2 = window.v2.value
     var select_graph = window.graph.value
-    console.log(select_state, select_city, select_crop, "1")
-    window.search_crop = []
+    window.search_v1 = []
+    window.search_v2 = []
     var data = myCharData()
     data.then(response => response.json())
     .then((data) => {
-        for(i in data){
-          // console.log(i)
-          for(j in data[i]){
-            // console.log(j)
-            if(j==select_city){
-              select_state = i;
-              break;
-            }
-          }
-        }
-        // console.log(select_state)
-      window.search_crop = Object.keys(data[select_state][select_city])
-      window.state.value = select_state
-      if(select_crop==""){
-        select_crop = Object.keys(data[select_state][select_city])[0]
+      if(select_state==""){
+        console.log(select_state)
+        new $.Zebra_Dialog('SELECT STATE FIRST!', {
+          custom_class: "myclass",
+          title: "WARNING!!"
+        });
+        myFunction(2)
+        window.city.value="";
+        return undefined;
       }
-      window.crop.value = select_crop
+        var datum_v1 = Object.keys(data[select_state][select_city])
+        for(var i in datum_v1){
+          if(datum_v1[i]!="data"){
+            window.search_v1.push(datum_v1[i])
+            console.log(datum_v1[i])
+          }
+        } 
       
-      showQuery("","city");
-      showQuery("","state");
-      showQuery("","crop");
-      console.log(select_state, select_city, select_crop, "2")
-      graphs(select_state, select_city, select_crop, select_graph);
+        var datum_v2 = Object.keys(data[select_state][select_city])
+        for(var i in datum_v2){
+          if(datum_v2[i]!="data"){
+            window.search_v2.push(datum_v2[i])
+            console.log(datum_v2[i])
+          }
+        } 
+      showQuery("", "village1")
+      showQuery("","village2")
+      graphs(select_state, select_city, select_v1, select_v2, select_graph);
       myFunction(2)
-      document.getElementById("graph-city").innerHTML = select_city
-      document.getElementById("graph-crop").innerHTML = select_crop
+      document.getElementById("graph-city").innerHTML = select_state
+      document.getElementById("graph-crop").innerHTML = select_city
     })
     
 });
 
 
-//---------------------------------THIRD FORM SUBMIT----------------------------------------------------
+//---------------------------------V1 FORM SUBMIT----------------------------------------------------
+
 document.querySelector('#form3').addEventListener("submit", function(event){
   event.preventDefault();
   var select_state = window.state.value
   var select_city = window.city.value
-  var select_crop = window.crop.value
+  var select_v1 = window.v1.value
+  var select_v2 = window.v2.value
   var select_graph = window.graph.value
+  window.search_v2=[]
   var data = myCharData()
     data.then(response => response.json())
     .then((data) => {
-    if(select_state==""){
-      select_state = Object.keys(data)[0]
-      window.state.value = select_state
-    }
-    if(select_city==""){
-      select_city = Object.keys(data[select_state])[0]
-      window.city.value = select_city
-    }
-    
-    showQuery("","city");
-    showQuery("","state");
-    showQuery("","crop");
-
-    console.log(select_state, select_city, select_crop)
-    graphs(select_state, select_city, select_crop, select_graph);
-    myFunction(3)
+        var datum_v2 = Object.keys(data[select_state][select_city])
+        for(var i in datum_v2){
+          if(datum_v2[i]=="data"){
+            continue;
+          }else if(datum_v2[i]==select_v1){
+            continue;
+          }else{
+            window.search_v2.push(datum_v2[i])
+          }
+        }
+      console.log()
+      showQuery("", "village2")
+      graphs(select_state, select_city, select_v1, select_v2, select_graph);
+      myFunction(3)
     document.getElementById("graph-city").innerHTML = select_city
-    document.getElementById("graph-crop").innerHTML = select_crop
+    document.getElementById("graph-crop").innerHTML = select_v1
   })
 });
 
+//-------------------------------V2 FORM SUBMIT-----------------------------------------------------
+
+document.querySelector('#form5').addEventListener("submit", function(event){
+  event.preventDefault();
+  var select_state = window.state.value
+  var select_city = window.city.value
+  var select_v1 = window.v1.value
+  var select_v2 = window.v2.value
+  var select_graph = window.graph.value
+  window.search_v1=[]
+  var data = myCharData()
+  
+    data.then(response => response.json())
+    .then((data) => {
+        var datum_v1 = Object.keys(data[select_state][select_city])
+        for(var i in datum_v1){
+          if(datum_v1[i]=="data"){
+            continue;
+          }else if(datum_v1[i]==select_v2){
+            console.log(datum_v1[i], "SDFFFFFFFFff")
+            continue;
+          }else{
+            window.search_v1.push(datum_v1[i])
+          }
+        }
+      console.log(search_v1)
+      showQuery("", "village1")
+      graphs(select_state, select_city, select_v1, select_v2, select_graph);
+      myFunction(4)
+    document.getElementById("graph-city").innerHTML = select_v1
+    document.getElementById("graph-crop").innerHTML = select_v2
+  })
+});
 //------------------------------GRAPH SELECT--------------------------------------------------------
 document.querySelector('#form4').addEventListener("submit", function(event){
   event.preventDefault();
   var select_state = window.state.value
   var select_city = window.city.value
-  var select_crop = window.crop.value
+  var select_v1 = window.v1.value
+  var select_v2 = window.v2.value
   var select_graph = window.graph.value
-  console.log(select_state, select_city, select_crop, select_graph)
-  graphs(select_state, select_city, select_crop, select_graph);
-  myFunction(4)
+  // console.log(select_state, select_city, select_crop, select_graph)
+  graphs(select_state, select_city, select_v1, select_v2, select_graph);
+  myFunction(5)
 });
 
 
@@ -216,33 +271,73 @@ function myFunction(n) {
 //********************** For Graph *****************************************
 
 
-
-function graphs(state, city, crop, graph){
+function graphs(state, city, v1, v2, graph){
   var data = myCharData()
   data.then(response => response.json())
   .then((data) => {
-    var min = []
-    var max = []
-    var avg = []
-    var x_axis = []
-    var select_graph = data[state][city][crop]
 
-    for(i in select_graph){
-      // console.log(Object.keys(select_graph[i]))
-      max.push(select_graph[i].max)
-      min.push(select_graph[i].min)
-      avg.push(select_graph[i].avg)
-      x_axis.push(select_graph[i].date)
-    }
-
-    if(graph=="PIE"){
-      pie(min, max, avg, x_axis)
-    }else if(graph=="LINE"){
-      line(min, max, avg, x_axis)
-    }else if(graph=="BAR"){
-      bar(min, max, avg, x_axis)
-    }else if(graph=="BUBBLE"){
-      bubble(min, max, avg, x_axis)
+    if(state=="" & city=="" & v1=="" & v2==""){
+      var x_axis = Object.keys(data["data"])
+      var y_axis = Object.values(data["data"])
+      if(graph=="PIE"){
+        pie1(x_axis, y_axis)
+      }else if(graph=="LINE"){
+        line1(x_axis, y_axis)
+      }else if(graph=="BAR"){
+        bar1(x_axis, y_axis)
+      }else if(graph=="BUBBLE"){
+        bubble1(x_axis, y_axis)
+      }
+    }else if(state!="" & city=="" & v1=="" & v2==""){
+      var x_axis = Object.keys(data[state]["data"])
+      var y_axis = Object.values(data[state]["data"])
+      if(graph=="PIE"){
+        pie1(x_axis, y_axis)
+      }else if(graph=="LINE"){
+        line1(x_axis, y_axis)
+      }else if(graph=="BAR"){
+        bar1(x_axis, y_axis)
+      }else if(graph=="BUBBLE"){
+        bubble1(x_axis, y_axis)
+      }
+    }else if(state!="" & city!="" & v1=="" & v2==""){
+      var x_axis = Object.keys(data[state][city]['data'])
+      var y_axis = Object.values(data[state][city]['data'])
+      if(graph=="PIE"){
+        pie1(x_axis, y_axis)
+      }else if(graph=="LINE"){
+        line1(x_axis, y_axis)
+      }else if(graph=="BAR"){
+        bar1(x_axis, y_axis)
+      }else if(graph=="BUBBLE"){
+        bubble1(x_axis, y_axis)
+      }
+    }else if(state!="" & city!="" & v1!="" & v2==""){
+      var x_axis = Object.keys(data[state][city][v1])
+      var y_axis = Object.values(data[state][city][v1])
+      if(graph=="PIE"){
+        pie1(x_axis, y_axis)
+      }else if(graph=="LINE"){
+        line1(x_axis, y_axis)
+      }else if(graph=="BAR"){
+        bar1(x_axis, y_axis)
+      }else if(graph=="BUBBLE"){
+        bubble1(x_axis, y_axis)
+      }
+    }else if(state!="" & city!="" & v1!="" & v2!=""){
+      var x_axis = Object.keys(data[state][city][v1])
+      var y_axis = Object.values(data[state][city][v1])
+      var x_axis1 = Object.keys(data[state][city][v2])
+      var y_axis1 = Object.values(data[state][city][v2])
+      if(graph=="PIE"){
+        pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2)
+      }else if(graph=="LINE"){
+        line2(x_axis, y_axis, x_axis1, y_axis1)
+      }else if(graph=="BAR"){
+        bar2(x_axis, y_axis, x_axis1, y_axis1)
+      }else if(graph=="BUBBLE"){
+        bubble2(x_axis, y_axis, x_axis1, y_axis1)
+      }
     }
 })
 }

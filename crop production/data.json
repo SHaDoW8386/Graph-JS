@@ -1,40 +1,56 @@
 {
-    "State" : {
-                "data":["45", "54", "21", "86", "54", "43", "87", "90", "87", "90"],
-                "M.P": {
-                    "data":["45", "54", "21", "86", "54", "43", "87", "90", "87", "90"],
-
-                    "Mandla":{
-                        "data": ["45", "54", "21", "86", "54", "43", "87"],
-                        "v1":["45", "54", "21", "86", "54", "43", "87"],
-                        "v2":["45", "54", "21", "86", "54", "43", "87"]
+                "data":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                "Madhya Pradesh": {
+                    "data":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                    "Jabalpur":{
+                        "data": {"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Bamhani":{"Soyabean": 64, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Nayagaon":{"Soyabean": 84, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Neem Kheda":{"Soyabean": 65, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Pipariya":{"Soyabean": 25, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Rewa":{"Soyabean": 55, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Sehora":{"Soyabean": 55, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72}
                     },
-
                     "Indore":{
-                        "data": ["45", "54", "21", "86", "54", "43", "87"],
-                        "v1":["45", "54", "21", "86", "54", "43", "87"],
-                        "v2":["45", "54", "21", "86", "54", "43", "87"]
-                    
+                        "data": {"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Bisan Kheda":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Dharnawad":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Dhaturia":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Khandwa":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Simrol":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Pitampur":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72}
+                    },
+                    "Bhopal":{
+                        "data": {"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Chanderi":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Chhapri":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Chhindwada":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Ghat Khedi":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Islamnagar":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "Kalapani":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72}
                     }
 
                 },
-                "U.P": {
-                    "data":["45", "54", "21", "86", "54", "43", "87", "90", "87", "90"],
-
+                "Uttar Pradesh": {
+                    "data":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
                     "Varanasi":{
-                        "data": ["45", "54", "21", "86", "54", "43", "87"],
-                        "v1":["45", "54", "21", "86", "54", "43", "87"],
-                        "v2":["45", "54", "21", "86", "54", "43", "87"]
-                    
+                        "data": {"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v1":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v2":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "V3":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v4":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v5":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v6":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72}
                     },
                     "Lucknow":{
-                        "data": ["45", "54", "21", "86", "54", "43", "87"],
-                        "v1":["45", "54", "21", "86", "54", "43", "87"],
-                        "v2":["45", "54", "21", "86", "54", "43", "87"]
-                    
+                        "data": {"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v1":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v2":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "V3":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v4":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v5":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72},
+                        "v6":{"Soyabean": 45, "Bean":65,"Potatoes":35, "Tomatoes":56, "Green Peas":24, "Gram":85, "wheat":64, "rice":72}
                     }
-
                 }
-    }
-    
+
 }

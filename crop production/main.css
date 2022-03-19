@@ -40,7 +40,8 @@ body{
 }
 .first-container,
 .second-container,
-.third-container{
+.third-container,
+.fifth-container{
   width:90%;
   /* background-color:aqua; */
   /* height:10%; */
@@ -116,14 +117,14 @@ section{
 }
 
 
-.city, .state, .crop, .graph {
+.city, .state, .village1, .village2, .graph {
     border: 1px dotted #ccc;
     padding: 5px;
     position: absolute;
     margin-left: 8px;
     width:200px;
     z-index:2;
-    /* background:rgba(0, 0, 0, 0.719); */
+    background:white;
     border-radius: 25px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -226,6 +227,35 @@ section{
   .set3{
     transform:scale(0.8) rotateX(180deg);
     /* filter:blur(1px); */
+  }
+
+  .myclass .ZebraDialog_Title {
+    background: green;
+  }
+  .myclass .ZebraDialog_Body {
+    color: white;
+      font-size: 21px;
+      background-color: rgba(0, 0, 0, 0.637);
+  }
+
+  .ZebraDialog_Information .ZebraDialog_Body{
+    background-image: url("https://www.kisaanhelpline.com/uploads/kh_services/Plant-Nutrition.png");
+    background-size:20%;
+  }
+
+  .ZebraDialog, .ZebraDialog_Body, .ZebraDialog_Buttons a, .ZebraDialog_Title {
+    font-family: 'Courier New', monospace;
+  }
+
+
+.ZebraDialog{
+    background-image: url("crop.jpg");
+    background-size: 100%;
+  }
+
+  .myclass .ZebraDialog_Title{
+    background-image: url("crop.jpg");
+    background-size: 100%;
   }
 
 

@@ -17,61 +17,49 @@
     <title>Document</title>
 </head>
 <body>
-    <section>
-        <div class="set">
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-        </div>
-        <div class="set set2">
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-        </div>
-        <div class="set set3">
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-          <div><img src="leaves1.png"></div>
-          <div><img src="leaves2.png"></div>
-          <div><img src="leaves3.png"></div>
-          <div><img src="leaves4.png"></div>
-        </div>
-      </section>
     <div class="left-side">
-        <div class="second-container">
+        <label class="switch" onclick="Modes()">
+            <input name="darktheme" type="checkbox" checked=true>
+            <span class="slider round"></span>
+          </label>
+        <div class="second-container" >
             <form autocomplete="off" id="form1">
                 <h2>STATE :- </h2>
-                <input type="text" name="state" id="state" placeholder="STATE" onKeyUp="showQuery(this.value, 'state')" onfocus="myFunction(1)">
-                <button type="button" onclick="myFunction(1)"><i class="drop fas fa-chevron-up"></i></button>
+                <input type="text" name="state" id="state" placeholder="STATE" onKeyUp="showQuery(this.value, 'state')"  onfocus="myFunction(1)">
+                <button type="button" disabled onclick="myFunction(1)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-state" style="display:none;" class="state hide"></div>
             </form>
         </div>
-        <div class="first-container">
+        <div class="first-container"  >
             <form autocomplete="off" id="form2">
                 <h2>CITY :- </h2>
-                <input type="text" name="city" id="city" placeholder="CITY" onKeyUp="showQuery(this.value, 'city')" onfocus="myFunction(2)">
-                <button type="button" onclick="myFunction(2)"><i class="drop fas fa-chevron-up"></i></button>
+                <input type="text" name="city" id="city" placeholder="CITY" onKeyUp="showQuery(this.value, 'city')"onclick="myFunction(2)" >
+                <button type="button" disabled onclick="myFunction(2)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-city" style="display:none;" class="city hide"></div>
             </form>
         </div>
-        <div class="third-container">
+        <div class="third-container" >
             <form autocomplete="off" id="form3">
                 <h2>CROP :- </h2>
-                <input type="text" name="crop" id="crop" placeholder="CROP" onKeyUp="showQuery(this.value, 'crop')" onfocus="myFunction(3)">
-                <button type="button" onclick="myFunction(3)"><i class="drop fas fa-chevron-up"></i></button>
+                <input type="text" name="crop" id="crop" placeholder="CROP" onKeyUp="showQuery(this.value, 'crop')" onclick="myFunction(3)">
+                <button type="button" disabled onclick="myFunction(3)"><i class="drop fas fa-chevron-up"></i></button>
                 <div id="show-crop"  style="display:none;" class="crop hide"></div>
+            </form>
+        </div>
+        <div class="fifth-container">
+            
+            <form autocomplete="off" id="form5">
+                <h2>DATE :- </h2>
+                <input placeholder="DATE:-" type="text" name="daterange">
+            </form>
+        </div>
+        
+        <div class="fourth-container" >
+            <form autocomplete="off" id="form4">
+                <h2>GRAPH :- </h2>
+                <input type="text" name="graph" id="graph" value="LINE" placeholder="GRAPH" onKeyUp="showQuery(this.value, 'graph')" onclick="myFunction(4)">
+                <button type="button" disabled onclick="myFunction(4)"><i class="drop fas fa-chevron-up"></i></button>
+                <div id="show-graph"  style="display:none;" class="graph hide"></div>
             </form>
         </div>
         <div class="sixth-container">
@@ -86,7 +74,7 @@
 
     <!-- -------------------------------------RIGHT SIDE----------------------------------------- -->
     <div class="right-side">
-        <div class="fourth-container">
+        <!-- <div class="fourth-container">
             <form autocomplete="off" id="form4">
                 <input type="text" name="graph" id="graph" placeholder="GRAPH" onKeyUp="showQuery(this.value, 'graph')" onfocus="myFunction(4)">
                 <button type="button" onclick="myFunction(4)"><i class="drop fas fa-chevron-up"></i></button>
@@ -97,8 +85,8 @@
             <form autocomplete="off" id="form5">
                 <input placeholder="DATE:-" type="text" name="daterange">
             </form>
-        </div>
-        <div class="annot">
+        </div> -->
+        <div class="annot" id="annot">
             <h3 id="graph-city">CITY</h3>
             <h2 id="graph-crop">CROP</h2>
         </div>

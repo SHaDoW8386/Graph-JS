@@ -1,112 +1,86 @@
 //---------------------- PIE CHART ---------------------------
 
-function pie(min, max, avg, x_axis){
+function pie1(x_axis, y_axis){
     var datapie = [{
-        values: min,
+        values: y_axis,
         labels: x_axis,
-        domain: {column: 0},
         name: 'MIN',
         hoverinfo: 'value+percent+name',
         textinfo: "value",
         textposition: "inside",
         hole: .4,
         type: 'pie'
-      },{
-        values: max,
-        labels: x_axis,
-        domain: {column: 1},
-        name: 'MAX',
-        hoverinfo: 'value+percent+name',
-        textinfo: "value",
-        textposition: "inside",
-        hole: .4,
-        type: 'pie'
-      },{
-        values: avg,
-        labels: x_axis,
-        domain: {column: 2},
-        textinfo: "value",
-        textposition: "inside",
-        name: 'AVG',
-        hoverinfo: 'value+percent+name',
-        hole: .4,
-        type: 'pie'
       }];
       
       var layout = {
-        title: 'MANDI BHAVV',
+        title: 'CROP PRODUCTION',
         annotations: [
           {
             font: {
               size: 20
             },
             showarrow: false,
-            text: 'MIN',
+            text: 'CROP',
             x: 0.12,
-            y: 0.5
-          },
-          {
-            font: {
-              size: 20
-            },
-            showarrow: false,
-            text: 'MAX',
-            x: 0.5,
-            y: 0.5
-          },
-          {
-            font: {
-              size: 20
-            },
-            showarrow: false,
-            text: 'AVG',
-            x: 0.87,
             y: 0.5
           }
         ],
         height: 600,
-        // width: 600,
         showlegend: true,
-        grid: {rows: 1, columns: 3}
       };
       
       Plotly.newPlot('myDiv', datapie, layout);
-      
-
 }
 
+function pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2){
+  var datapie = [{
+      values: y_axis,
+      labels: x_axis,
+      domain: {column: 0},
+      name: 'Village 1',
+      hoverinfo: 'value+percent+name',
+      textinfo: "value",
+      textposition: "inside",
+      hole: .4,
+      type: 'pie'
+    },{
+      values: y_axis1,
+      labels: x_axis1,
+      domain: {column: 1},
+      name: 'Village 2',
+      hoverinfo: 'value+percent+name',
+      textinfo: "value",
+      textposition: "inside",
+      hole: .4,
+      type: 'pie'
+    }];
+    
+    var layout = {
+      title: 'CROP PRODUCTION',
+      height: 600,
+      showlegend: true,
+      grid: {rows: 1, columns: 2},
 
-
+    };
+    
+    Plotly.newPlot('myDiv', datapie, layout);
+}
 
 //---------------------------------BAR CHART---------------------------------------------------
-function bar(min, max, avg, x_axis){
+function bar1(x_axis, y_axis){
     var trace1 = {
         x: x_axis,
-        y: min,
-        name: 'MIN',
+        y: y_axis,
+        name: 'CROP',
         type: 'bar'
       };
       
-      var trace2 = {
-        x: x_axis,
-        y: max,
-        name: 'MAX',
-        type: 'bar'
-      };
-
-      var trace3 = {
-        x: x_axis,
-        y: avg,
-        name: 'AVG',
-        type: 'bar'
-      };
-      
-      var databar = [trace1, trace2, trace3];
+      var databar = [trace1];
       
       var layout = {
-        title:"MANDI BHAVV",
+        title:"CROP PRODUCTION",
         xaxis:{
-            title:"DATE",
+            title:"CROP",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
@@ -115,7 +89,7 @@ function bar(min, max, avg, x_axis){
             
         },
         yaxis:{
-            title:"PRICE",
+            title:"PRODUCTION",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
@@ -123,20 +97,61 @@ function bar(min, max, avg, x_axis){
               },
         },
         barmode: 'group',
+        hovermode:"x unified",
         height:600
         };
       
       Plotly.newPlot('myDiv', databar, layout);
 }
 
+function bar2(x_axis, y_axis, x_axis1, y_axis1){ 
+
+    var databar = [{
+      x: x_axis,
+      y: y_axis,
+      name: 'Village 1',
+      type: 'bar'
+    },{
+      x: x_axis1,
+      y: y_axis1,
+      name: 'village 2',
+      type: 'bar'
+    }];
+    
+    var layout = {
+      title:"CROP PRODUCTION",
+      xaxis:{
+          title:"CROP",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: 'black'
+            },
+          
+      },
+      yaxis:{
+          title:"PRODUCTION",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: 'black'
+            },
+      },
+      barmode: 'group',
+      height:600
+      };
+    
+    Plotly.newPlot('myDiv', databar, layout);
+}
+
 //---------------------------------LINE CHART-------------------------------------------------
 
-function line(min, max, avg, x_axis){
+function line1(x_axis, y_axis){
     var Min = {
         x: x_axis,
-        y: min,
+        y: y_axis,
         type: 'scatter',
-        name: "MIN",
+        name: "CROP",
         hoverinfo:"name+y",
         line: {shape: 'spline',width:5, color:'blue'},
         marker: {
@@ -144,124 +159,124 @@ function line(min, max, avg, x_axis){
           size: 10
         },
       };
-    
-      var Max = {
-        x: x_axis,
-        y: max,
-        type: 'scatter',
-        name: "MAX",
-        line: {shape: 'spline',width:5, color:'red'},
-        marker: {
-          color: 'black',
-          size: 10
-        },
-      };
-    
-      var Avg = {
-        x: x_axis,
-        y: avg,
-        type: 'scatter',
-        name: "AVG",
-        line: {shape: 'spline',width:5, color:'green'},
-        marker: {
-          color: 'black',
-          size: 10
-        },
-        
-      };
-    
-      var datum = [Min, Max, Avg];
-
+      var datum = [Min];
       var layout = {
         height: 600,
-        title:"MANDI BHAVV",
+        title:"CROP PRODUCTION",
         xaxis:{
-            title:"DATE",
+            title:"CROP",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
                 color: 'black'
               },
-            
+            tickangle:-45,
         },
         yaxis:{
-            title:"PRICE",
+            title:"PRODUCTION",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
                 color: 'black'
               },
+          
         },
-        // width: 800,
-        // grid: {rows: 2, columns: 2}
       };
-
       Plotly.newPlot('myDiv', datum, layout);
+}
+
+function line2(x_axis, y_axis, x_axis1, y_axis1){
+    console.log(x_axis)
+    console.log(y_axis)
+    console.log(x_axis1)
+    console.log(y_axis1)
+    var datum = [{
+      x: x_axis,
+      y: y_axis,
+      type: 'scatter',
+      name: "Village 1",
+      hoverinfo:"name+y",
+      line: {shape: 'spline',width:5, color:'red'},
+      marker: {
+        color: 'black',
+        size: 10
+      },
+    },{
+      x: x_axis1,
+      y: y_axis1,
+      type: 'scatter',
+      name: "Village 2",
+      hoverinfo:"name+y",
+      line: {shape: 'spline',width:5, color:'blue'},
+      marker: {
+        color: 'black',
+        size: 10
+      },
+    }];
+    var layout = {
+      height: 600,
+      title:"CROP PRODUCTION",
+      xaxis:{
+          title:"CROP",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: 'black'
+            },
+          tickangle:-45,
+      },
+      yaxis:{
+          title:"PRODUCTION",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: 'black'
+            },
+        
+      },
+      hovermode:"x unified",
+    };
+    Plotly.newPlot('myDiv', datum, layout);
 }
 
 
 
 //--------------------------------BUBBLE CHART-----------------------------------------------
 
-function bubble(min, max, avg, x_axis){
+function bubble1(x_axis, y_axis){
     var trace1 = {
         x: x_axis,
-        y: min,
-        text: ['A<br>size: 40', 'B<br>size: 60', 'C<br>size: 80', 'D<br>size: 100'],
+        y: y_axis,
         mode: 'markers',
         marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
+        size: y_axis,
         sizemode: 'area'
         }
     };
     
-    var trace2 = {
-        x: x_axis,
-        y: max,
-        text: ['A</br>size: 40</br>sixeref: 0.2', 'B</br>size: 60</br>sixeref: 0.2', 'C</br>size: 80</br>sixeref: 0.2', 'D</br>size: 100</br>sixeref: 0.2'],
-        mode: 'markers',
-        marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
-        //setting 'sizeref' to lower than 1 decreases the rendered size
-        // sizeref: 2,
-        sizemode: 'area'
-        }
-    };
-    
-    var trace3 = {
-        x: x_axis,
-        y: avg,
-        text: ['A</br>size: 40</br>sixeref: 2', 'B</br>size: 60</br>sixeref: 2', 'C</br>size: 80</br>sixeref: 2', 'D</br>size: 100</br>sixeref: 2'],
-        mode: 'markers',
-        marker: {
-        size: [400, 600, 800, 1000, 1100, 1200],
-        //setting 'sizeref' to less than 1, increases the rendered marker sizes
-        // sizeref: 0.2,
-        sizemode: 'area'
-        }
-    };
-    
-    var databubble = [trace1, trace2, trace3];
+    var databubble = [trace1];
     
     var layout = {
-        title: 'MANDI BHAVV',
+        title: 'CROP PRODUCTION',
         xaxis:{
-            title:"DATE",
+            title:"CROP",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
                 color: 'black'
               },
+              tickangle:-45
             
         },
         yaxis:{
-            title:"PRICE",
+            title:"PRODUCTION",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
                 color: 'black'
               },
         },
+        hovermode:"x unified",
         showlegend: true,
         height: 600,
         // width: 600
