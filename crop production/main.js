@@ -269,9 +269,22 @@ function myFunction(n) {
 
 
 //********************** For Graph *****************************************
-
+function Modes(){
+  // if(city.value!="" & state.value!="" & v1.value!="" & graph.value!="" & v2.value!=""){
+    graphs(state.value, city.value, v1.value, v2.value,  graph.value);
+  // }else{
+  //   return undefined;
+  // }
+}
 
 function graphs(state, city, v1, v2, graph){
+  if($("input[type=checkbox][name=darktheme]").prop("checked")==true){
+    themes = ["white", "#080808", '#080808' ,"#444"]
+    document.getElementById("annot").style.color="white"
+  }else{
+    themes = ["black", "#fff", "#fff", "#444"]
+    document.getElementById("annot").style.color="black"
+  }
   var data = myCharData()
   data.then(response => response.json())
   .then((data) => {
@@ -280,49 +293,61 @@ function graphs(state, city, v1, v2, graph){
       var x_axis = Object.keys(data["data"])
       var y_axis = Object.values(data["data"])
       if(graph=="PIE"){
-        pie1(x_axis, y_axis)
+        pie1(x_axis, y_axis, "INDIA")
       }else if(graph=="LINE"){
-        line1(x_axis, y_axis)
+        line1(x_axis, y_axis, "INDIA")
       }else if(graph=="BAR"){
-        bar1(x_axis, y_axis)
+        bar1(x_axis, y_axis, "INDIA")
       }else if(graph=="BUBBLE"){
-        bubble1(x_axis, y_axis)
+        bubble1(x_axis, y_axis, "INDIA")
       }
     }else if(state!="" & city=="" & v1=="" & v2==""){
       var x_axis = Object.keys(data[state]["data"])
       var y_axis = Object.values(data[state]["data"])
       if(graph=="PIE"){
-        pie1(x_axis, y_axis)
+        pie1(x_axis, y_axis, state)
       }else if(graph=="LINE"){
-        line1(x_axis, y_axis)
+        line1(x_axis, y_axis, state)
       }else if(graph=="BAR"){
-        bar1(x_axis, y_axis)
+        bar1(x_axis, y_axis, state)
       }else if(graph=="BUBBLE"){
-        bubble1(x_axis, y_axis)
+        bubble1(x_axis, y_axis, state)
       }
     }else if(state!="" & city!="" & v1=="" & v2==""){
       var x_axis = Object.keys(data[state][city]['data'])
       var y_axis = Object.values(data[state][city]['data'])
       if(graph=="PIE"){
-        pie1(x_axis, y_axis)
+        pie1(x_axis, y_axis, city)
       }else if(graph=="LINE"){
-        line1(x_axis, y_axis)
+        line1(x_axis, y_axis, city)
       }else if(graph=="BAR"){
-        bar1(x_axis, y_axis)
+        bar1(x_axis, y_axis, city)
       }else if(graph=="BUBBLE"){
-        bubble1(x_axis, y_axis)
+        bubble1(x_axis, y_axis, city)
       }
     }else if(state!="" & city!="" & v1!="" & v2==""){
       var x_axis = Object.keys(data[state][city][v1])
       var y_axis = Object.values(data[state][city][v1])
       if(graph=="PIE"){
-        pie1(x_axis, y_axis)
+        pie1(x_axis, y_axis, v1)
       }else if(graph=="LINE"){
-        line1(x_axis, y_axis)
+        line1(x_axis, y_axis, v1)
       }else if(graph=="BAR"){
-        bar1(x_axis, y_axis)
+        bar1(x_axis, y_axis, v1)
       }else if(graph=="BUBBLE"){
-        bubble1(x_axis, y_axis)
+        bubble1(x_axis, y_axis, v1)
+      }
+    }else if(state!="" & city!="" & v1=="" & v2!=""){
+      var x_axis = Object.keys(data[state][city][v2])
+      var y_axis = Object.values(data[state][city][v2])
+      if(graph=="PIE"){
+        pie1(x_axis, y_axis, v2)
+      }else if(graph=="LINE"){
+        line1(x_axis, y_axis, v2)
+      }else if(graph=="BAR"){
+        bar1(x_axis, y_axis, v2)
+      }else if(graph=="BUBBLE"){
+        bubble1(x_axis, y_axis, v2)
       }
     }else if(state!="" & city!="" & v1!="" & v2!=""){
       var x_axis = Object.keys(data[state][city][v1])
@@ -332,11 +357,11 @@ function graphs(state, city, v1, v2, graph){
       if(graph=="PIE"){
         pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2)
       }else if(graph=="LINE"){
-        line2(x_axis, y_axis, x_axis1, y_axis1)
+        line2(x_axis, y_axis, x_axis1, y_axis1, v1, v2)
       }else if(graph=="BAR"){
-        bar2(x_axis, y_axis, x_axis1, y_axis1)
+        bar2(x_axis, y_axis, x_axis1, y_axis1, v1, v2)
       }else if(graph=="BUBBLE"){
-        bubble2(x_axis, y_axis, x_axis1, y_axis1)
+        bubble2(x_axis, y_axis, x_axis1, y_axis1, v1, v2)
       }
     }
 })

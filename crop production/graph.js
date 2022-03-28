@@ -1,10 +1,11 @@
 //---------------------- PIE CHART ---------------------------
+var colors = ['blue', 'rgba(255, 144, 14, 1)', 'green', 'red']
 
-function pie1(x_axis, y_axis){
+function pie1(x_axis, y_axis, name){
     var datapie = [{
         values: y_axis,
         labels: x_axis,
-        name: 'MIN',
+        name: name,
         hoverinfo: 'value+percent+name',
         textinfo: "value",
         textposition: "inside",
@@ -13,7 +14,6 @@ function pie1(x_axis, y_axis){
       }];
       
       var layout = {
-        title: 'CROP PRODUCTION',
         annotations: [
           {
             font: {
@@ -25,19 +25,19 @@ function pie1(x_axis, y_axis){
             y: 0.5
           }
         ],
-        height: 600,
+        height: 700,
         showlegend: true,
       };
       
       Plotly.newPlot('myDiv', datapie, layout);
 }
 
-function pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2){
+function pie2(x_axis, y_axis, x_axis1, y_axis1, n1, n2){
   var datapie = [{
       values: y_axis,
       labels: x_axis,
       domain: {column: 0},
-      name: 'Village 1',
+      name: n1,
       hoverinfo: 'value+percent+name',
       textinfo: "value",
       textposition: "inside",
@@ -47,7 +47,7 @@ function pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2){
       values: y_axis1,
       labels: x_axis1,
       domain: {column: 1},
-      name: 'Village 2',
+      name: n2,
       hoverinfo: 'value+percent+name',
       textinfo: "value",
       textposition: "inside",
@@ -56,8 +56,7 @@ function pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2){
     }];
     
     var layout = {
-      title: 'CROP PRODUCTION',
-      height: 600,
+      height: 700,
       showlegend: true,
       grid: {rows: 1, columns: 2},
 
@@ -67,78 +66,102 @@ function pie2(x_axis, y_axis, x_axis1, y_axis1, v1, v2){
 }
 
 //---------------------------------BAR CHART---------------------------------------------------
-function bar1(x_axis, y_axis){
+function bar1(x_axis, y_axis, n1){
     var trace1 = {
         x: x_axis,
         y: y_axis,
-        name: 'CROP',
-        type: 'bar'
+        name: n1,
+        type: 'bar',
+        marker:{
+          color:"red",
+        }
       };
       
       var databar = [trace1];
       
       var layout = {
-        title:"CROP PRODUCTION",
+        // title:"MANDI BHAVV",
         xaxis:{
-            title:"CROP",
+            title:"DATE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
+              color:themes[0],
+              gridcolor:themes[3],
             
         },
         yaxis:{
-            title:"PRODUCTION",
+            title:"PRICE",
+            color:themes[0],
+            gridcolor:themes[3],
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
         },
-        barmode: 'group',
         hovermode:"x unified",
-        height:600
+        barmode: 'group',
+        // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2],
+        height:700
         };
       
       Plotly.newPlot('myDiv', databar, layout);
 }
 
-function bar2(x_axis, y_axis, x_axis1, y_axis1){ 
+function bar2(x_axis, y_axis, x_axis1, y_axis1, n1, n2){ 
 
     var databar = [{
       x: x_axis,
       y: y_axis,
-      name: 'Village 1',
-      type: 'bar'
+      name: n1,
+      type: 'bar',
+      marker:{
+        color:"red"
+      }
     },{
       x: x_axis1,
       y: y_axis1,
-      name: 'village 2',
-      type: 'bar'
+      name: n2,
+      type: 'bar',
+      marker:{
+        color:"blue"
+      }
     }];
-    
+      
     var layout = {
-      title:"CROP PRODUCTION",
+      // title:"MANDI BHAVV",
       xaxis:{
-          title:"CROP",
+          title:"DATE",
           tickfont: {
               family: 'Old Standard TT, serif',
               size: 14,
-              color: 'black'
+              color: themes[0]
             },
+            color:themes[0],
+            gridcolor:themes[3],
           
       },
       yaxis:{
-          title:"PRODUCTION",
+          title:"PRICE",
+          color:themes[0],
+          gridcolor:themes[3],
           tickfont: {
               family: 'Old Standard TT, serif',
               size: 14,
-              color: 'black'
+              color: themes[0]
             },
       },
+      hovermode:"x unified",
       barmode: 'group',
-      height:600
+      // width: 800,
+      paper_bgcolor:themes[1],
+      plot_bgcolor:themes[2],
+      height:700
       };
     
     Plotly.newPlot('myDiv', databar, layout);
@@ -146,12 +169,12 @@ function bar2(x_axis, y_axis, x_axis1, y_axis1){
 
 //---------------------------------LINE CHART-------------------------------------------------
 
-function line1(x_axis, y_axis){
+function line1(x_axis, y_axis, n1){
     var Min = {
         x: x_axis,
         y: y_axis,
         type: 'scatter',
-        name: "CROP",
+        name: n1,
         hoverinfo:"name+y",
         line: {shape: 'spline',width:5, color:'blue'},
         marker: {
@@ -161,40 +184,44 @@ function line1(x_axis, y_axis){
       };
       var datum = [Min];
       var layout = {
-        height: 600,
-        title:"CROP PRODUCTION",
+        height: 700,
+        // title:"MANDI BHAVV",
         xaxis:{
-            title:"CROP",
+            title:"DATE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
-            tickangle:-45,
+            color:themes[0],
+            gridcolor:themes[3],
+            
         },
         yaxis:{
-            title:"PRODUCTION",
+            title:"PRICE",
             tickfont: {
                 family: 'Old Standard TT, serif',
                 size: 14,
-                color: 'black'
+                color: themes[0]
               },
-          
+              gridcolor:themes[3],
+              color:themes[0],
         },
+        hovermode:"x unified",
+        // width: 800,
+        paper_bgcolor:themes[1],
+        plot_bgcolor:themes[2]
+        // grid: {rows: 2, columns: 2}
       };
       Plotly.newPlot('myDiv', datum, layout);
 }
 
-function line2(x_axis, y_axis, x_axis1, y_axis1){
-    console.log(x_axis)
-    console.log(y_axis)
-    console.log(x_axis1)
-    console.log(y_axis1)
+function line2(x_axis, y_axis, x_axis1, y_axis1, n1, n2){
     var datum = [{
       x: x_axis,
       y: y_axis,
       type: 'scatter',
-      name: "Village 1",
+      name: n1,
       hoverinfo:"name+y",
       line: {shape: 'spline',width:5, color:'red'},
       marker: {
@@ -205,7 +232,7 @@ function line2(x_axis, y_axis, x_axis1, y_axis1){
       x: x_axis1,
       y: y_axis1,
       type: 'scatter',
-      name: "Village 2",
+      name: n2,
       hoverinfo:"name+y",
       line: {shape: 'spline',width:5, color:'blue'},
       marker: {
@@ -214,27 +241,34 @@ function line2(x_axis, y_axis, x_axis1, y_axis1){
       },
     }];
     var layout = {
-      height: 600,
-      title:"CROP PRODUCTION",
+      height: 700,
+      // title:"MANDI BHAVV",
       xaxis:{
-          title:"CROP",
+          title:"DATE",
           tickfont: {
               family: 'Old Standard TT, serif',
               size: 14,
-              color: 'black'
+              color: themes[0]
             },
-          tickangle:-45,
+          color:themes[0],
+          gridcolor:themes[3],
+          
       },
       yaxis:{
-          title:"PRODUCTION",
+          title:"PRICE",
           tickfont: {
               family: 'Old Standard TT, serif',
               size: 14,
-              color: 'black'
+              color: themes[0]
             },
-        
+            gridcolor:themes[3],
+            color:themes[0],
       },
       hovermode:"x unified",
+      // width: 800,
+      paper_bgcolor:themes[1],
+      plot_bgcolor:themes[2]
+      // grid: {rows: 2, columns: 2}
     };
     Plotly.newPlot('myDiv', datum, layout);
 }
@@ -243,11 +277,12 @@ function line2(x_axis, y_axis, x_axis1, y_axis1){
 
 //--------------------------------BUBBLE CHART-----------------------------------------------
 
-function bubble1(x_axis, y_axis){
+function bubble1(x_axis, y_axis, n1){
     var trace1 = {
         x: x_axis,
         y: y_axis,
         mode: 'markers',
+        name: n1,
         marker: {
         size: y_axis,
         sizemode: 'area'
@@ -257,30 +292,97 @@ function bubble1(x_axis, y_axis){
     var databubble = [trace1];
     
     var layout = {
-        title: 'CROP PRODUCTION',
-        xaxis:{
-            title:"CROP",
-            tickfont: {
-                family: 'Old Standard TT, serif',
-                size: 14,
-                color: 'black'
-              },
-              tickangle:-45
-            
-        },
-        yaxis:{
-            title:"PRODUCTION",
-            tickfont: {
-                family: 'Old Standard TT, serif',
-                size: 14,
-                color: 'black'
-              },
-        },
-        hovermode:"x unified",
-        showlegend: true,
-        height: 600,
-        // width: 600
-    };
+      // title: 'MANDI BHAVV',
+      xaxis:{
+          title:"DATE",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: themes[0]
+            },
+            color:themes[0],
+            gridcolor:themes[3],
+
+          
+      },
+      yaxis:{
+          title:"PRICE",
+          tickfont: {
+              family: 'Old Standard TT, serif',
+              size: 14,
+              color: themes[0]
+            },
+          color:themes[0],
+          gridcolor:themes[3],
+      },
+      showlegend: true,
+      hovermode:"x unified",
+      height: 700,
+      // width: 800,
+      paper_bgcolor:themes[1],
+      plot_bgcolor:themes[2]
+      // width: 600
+  };
     
     Plotly.newPlot('myDiv', databubble, layout);
+}
+
+
+function bubble2(x_axis, y_axis,x_axis1,y_axis1, n1, n2){
+  var trace1 = {
+      x: x_axis,
+      y: y_axis,
+      mode: 'markers',
+      name: n1,
+      marker: {
+      size: y_axis,
+      sizemode: 'area'
+      }
+  };
+  var trace2 = {
+    x: x_axis1,
+    y: y_axis2,
+    mode: 'markers',
+    name: n2,
+    marker: {
+    size: y_axis2,
+    sizemode: 'area'
+    }
+};
+  var databubble = [trace1, trace2];
+  
+  var layout = {
+    // title: 'MANDI BHAVV',
+    xaxis:{
+        title:"DATE",
+        tickfont: {
+            family: 'Old Standard TT, serif',
+            size: 14,
+            color: themes[0]
+          },
+          color:themes[0],
+          gridcolor:themes[3],
+
+        
+    },
+    yaxis:{
+        title:"PRICE",
+        tickfont: {
+            family: 'Old Standard TT, serif',
+            size: 14,
+            color: themes[0]
+          },
+        color:themes[0],
+        gridcolor:themes[3],
+    },
+    showlegend: true,
+    hovermode:"x unified",
+    height: 700,
+    // width: 800,
+    paper_bgcolor:themes[1],
+    plot_bgcolor:themes[2]
+    // width: 600
+};
+  
+  Plotly.newPlot('myDiv', databubble, layout);
 }

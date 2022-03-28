@@ -4,12 +4,73 @@
   list-style: none;
 }
 
+.switch {
+  position: relative;
+  /* top:3%; */
+  /* left:25%; */
+  left:110px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 40px;
+  height: 14px;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: black;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px black;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
 .annot{
   position: absolute;
-  right: 5%;
-  bottom:0%;
   z-index: 3;
+  color:white;
   display:flex;
+  right:35%;
   flex-direction:column;
   justify-content: center;
   align-items: center;
@@ -18,30 +79,35 @@
   /* background-color: aqua; */
 }
 .annot>h2{
-  margin-top:-5%;
+  margin-top:-8px;
 }
 body{
-  display:flex;
-  justify-content: space-around;
-  font-family: 'Courier New', monospace;
-  align-items: center;
-}
+    display:flex;
+    justify-content: space-around;
+    font-family: 'Courier New', monospace;
+    align-items: center;
+    background-image: url("./bg.jpg");
+    background-size: 90%;
+  }
 .left-side{
   width:20%;
   padding: 5px;
   display:flex;
-  height:700px;
+  height:600px;
   justify-content:space-evenly;
   flex-direction: column;
-  /* background-color: purple; */
+  background-color: rgba(0, 0, 0, 0.637);
   z-index: 2;
   align-items: center;
+  color: white;
   padding: 5px;
+  border-radius: 25px;
 }
 .first-container,
 .second-container,
 .third-container,
-.fifth-container{
+.fifth-container,
+.fourth-container{
   width:90%;
   /* background-color:aqua; */
   /* height:10%; */
@@ -50,6 +116,7 @@ body{
 form{
   width: 100%;
   background:none;
+  color:white;
 }
 
 form > input{
@@ -57,13 +124,19 @@ form > input{
   padding:5px;
   border-radius: 25px;
   background: none;
-  border:none;
-  box-shadow:0 0 5px 2px black;
+  /* border:none; */
+  /* box-shadow:0 -2px 10px 1px white; */
+  color:white;
   width:80%;
+  text-align: center;
 }
 
 form > input{
   margin-left: 5px;
+  border-top:none;
+  border-left: none;
+  border-right: none;
+  border-bottom:2px solid green;
 }
 
 form > button{
@@ -73,32 +146,12 @@ form > button{
   border:none;
   width:30px;
   height:30px;
-  box-shadow:0 0 5px 2px black;
+  /* box-shadow:0 -2px 5px 2px black; */
 }
 
-section{
-  position:fixed;
-  width:100%;
-  height:100vh;
-  background:transparent;
-  overflow:hidden ;
-  display:flex;
-  z-index: 1;
-  justify-content:center;
-  align-items:center;
-}
 
-.fourth-container{
-  position: relative;
-  width:220px;
-  display:flex;
-  top:-8%;
-}
-.fourth-container>form{
-  display:flex;
-  justify-content: space-around;
-  align-items: center;
-  width:100%;
+form > input::placeholder{
+  color:white;
 }
 
 
@@ -106,47 +159,38 @@ section{
 .right-side{
   width:70%;
   /* border: 2px solid black; */
-  height:650px;
+  height:700px;
   box-shadow:0 0 10px 5px black;
+  background-color: rgba(0, 0, 0, 0.637);
   z-index : 2;
   display:flex;
   flex-direction:column;
   border-radius:20px;
-  background: transparent;
-  margin-top: 4%;
 }
 
 
 .city, .state, .village1, .village2, .graph {
-    border: 1px dotted #ccc;
-    padding: 5px;
-    position: absolute;
-    margin-left: 8px;
-    width:200px;
-    z-index:2;
-    background:white;
-    border-radius: 25px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    color:white;
-    flex-direction:column;
-    text-align:center;
-    overflow-y: auto;
-    box-shadow: 0 3px 5px 2px black;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scrollbar-color: transparent;
-    height:auto;
-    max-height:100px;
-  }
-
-  .graph{
-    height: 100px;
-    top: 100%;
-    margin-left: 0;
-    width: 150px;
-    left: 8%;
-    background-color: white;
+  border: 1px dotted #ccc;
+  padding: 5px;
+  position: absolute;
+  margin-left: 8px;
+  width:200px;
+  z-index:2;
+  background-color:aliceblue;
+  border-radius: 25px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  color:black;
+  flex-direction:column;
+  text-align:center;
+  overflow-y: auto;
+  box-shadow: 0 3px 5px 2px black;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scrollbar-color: transparent;
+  /* background:white; */
+  height:auto;
+  max-height:100px;
   }
 
   .button-option{
@@ -164,71 +208,7 @@ section{
   }
 
 
-  section .set{
-    position:absolute ;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    pointer-events:none;
-  }
-  section .set div{
-    position:absolute ;
-    display:block ;
-  }
-
-  section .set div img{
-    width:50%;
-  }
-  section .set div:nth-child(1){
-    left:20%;
-    animation:animate 15s linear infinite ;
-    animation-delay:-7s;
-  }
-  section .set div:nth-child(2){
-    left:50%;
-    animation:animate 20s linear infinite ;
-    animation-delay:-5s;
-  }
-  section .set div:nth-child(3){
-    left:70%;
-    animation:animate 20s linear infinite ;
-    animation-delay:0s;
-  }
-  section .set div:nth-child(4){
-    left:0%;
-    animation:animate 15s linear infinite ;
-    animation-delay:-5s;
-  }
-  section .set div:nth-child(5){
-    left:85%;
-    animation:animate 18s linear infinite ;
-    animation-delay:-10s;
-  }
-  section .set div:nth-child(6){
-    left:20%;
-    animation:animate 15s linear infinite ;
-    animation-delay:-7s;
-  }
-  section .set div:nth-child(7){
-    left:0%;
-    animation:animate 12s linear infinite ;
-    
-  }
-  section .set div:nth-child(8){
-    left:60%;
-    animation:animate 15s linear infinite ;
-  }
-
-  .set2{
-    transform:scale(2) rotateY(180deg);
-    /* filter:blur(2px); */
-  }
-  .set3{
-    transform:scale(0.8) rotateX(180deg);
-    /* filter:blur(1px); */
-  }
-
+ 
   .myclass .ZebraDialog_Title {
     background: green;
   }
@@ -258,30 +238,15 @@ section{
     background-size: 100%;
   }
 
+  
 
-  @keyframes animate{
-    0%{
-      opacity:0;
-      top: -10%;
-      transform:translateX(20px) rotate(0deg);
-    }
-    10%{
-      opacity:1;
-    }
-    20%{
-      transform:translateX(-20px) rotate(45deg);
-    }
-    40%{
-      transform:translateX(-20px) rotate(90deg);
-    }
-    60%{
-      transform:translateX(20px) rotate(180deg);
-    }
-    80%{
-      transform:translateX(-20px) rotate(180deg);
-    }
-    100%{
-      top: 110%;
-      transform:translateX(-20px) rotate(225deg);
-    }
+  .js-plotly-plot .plotly .main-svg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+    border-radius: 25px;
+    padding: 5px;
+    /* background-color: rgba(0, 0, 0, 0.384); */
+    /* color:white; */
   }
