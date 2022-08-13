@@ -160,7 +160,7 @@ function bar(min, max, avg, x_axis){
         // width: 800,
         paper_bgcolor:themes[1],
         plot_bgcolor:themes[2],
-        height:700
+        // height:
         };
       
       Plotly.newPlot('myDiv', databar, layout);
